@@ -26,4 +26,4 @@ jobs:
     needs: add_tag
     steps:
     - run: echo ${{needs.add_tag.outputs.new_tag}}
-    - run: echo ${{needs.add_tag.outputs.tag}}
+    - run: echo ${{needs.add_tag.outputs.old_tag}}
