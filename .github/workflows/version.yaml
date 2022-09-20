@@ -35,7 +35,7 @@ jobs:
     steps:
       - id: no_v_old 
         run: |
-          echo "${{needs.add_tag.outputs.old_tag}}//v/"
+          echo "${{needs.add_tag.outputs.old_tag//v/}}"
       - id: no_v_new
         run: |
           echo "${{needs.add_tag.outputs.new_tag}}" >> NEW_TAG
