@@ -52,7 +52,8 @@ jobs:
           echo "${{needs.no_v.outputs.new_tag_no_v}}"
           echo "${{needs.no_v.outputs.old_tag_no_v}}"
       - name: Find and Replace
-        uses: datamonsters/replace-action@v2
+        uses: jacobtomlinson/gha-find-replace@v2
         with:
-          files: 'project.toml'
-          replacements: '${{needs.no_v.outputs.old_tag_no_v}}=${{needs.no_v.outputs.new_tag_no_v}}'
+          find: "${{needs.no_v.outputs.old_tag_no_v}}"
+          replace: "${{needs.no_v.outputs.new_tag_no_v}}"
+          regex: false
