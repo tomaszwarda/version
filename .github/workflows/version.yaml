@@ -35,11 +35,11 @@ jobs:
     steps:
       - id: no_v_old 
         run: |
-          echo "${{steps.add_tag.outputs.old_tag}}" >> OLD_TAG
+          echo "${{needs.add_tag.outputs.old_tag}}" >> OLD_TAG
           echo "${OLD_TAG//v/}"
       - id: no_v_new
         run: |
-          echo "${{steps.add_tag.outputs.new_tag}}" >> NEW_TAG
+          echo "${{needs.add_tag.outputs.new_tag}}" >> NEW_TAG
           echo "${NEW_TAG//v/}"
   change_toml:
     runs-on: ubuntu-latest
