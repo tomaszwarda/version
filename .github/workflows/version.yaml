@@ -38,7 +38,7 @@ jobs:
         run: echo "${{needs.add_tag.outputs.old_tag}}" | sed 's/v//'
       - id: no_v_new
         run: |
-          tag="${{needs.add_tag.outputs.new_tag}}" | sed 's/v//'
+          tag=$(echo "${{needs.add_tag.outputs.new_tag}}" | sed 's/v//')
           echo "$tag"
           echo "::set-output name=test::$tag"
       - id: lll
