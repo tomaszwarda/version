@@ -21,5 +21,4 @@ jobs:
     runs-on: ubuntu-latest
     needs: add_tag
     steps:
-    - run: echo ${{needs.add_tag.outputs.new_tag}}
-    
+    - run: echo "elo"
