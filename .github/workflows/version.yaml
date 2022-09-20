@@ -7,8 +7,6 @@ on:
 jobs:
   add_tag:
     runs-on: ubuntu-lates
-    outputs:
-      new_tag: ${{steps.new_tag.outputs.new_tag}}
     steps:
     - id: build
       uses: actions/checkout@v3
