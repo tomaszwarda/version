@@ -26,20 +26,28 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DEFAULT_BUMP: patch
-  change_toml:
+  no_v:
     runs-on: ubuntu-latest
     needs: add_tag
+    outputs:
+      new_tag_no_v: ${{steps.no_v_old.outputs.test}}
+      old_tag_no_v: ${{steps.no_v_new.outputs.test}}
     steps:
-    - run: echo ${{needs.add_tag.outputs.new_tag}}
-    - run: echo ${{needs.add_tag.outputs.old_tag}}
+      - id: no_v_old 
+        run: echo "${OLD_TAG//v/}"
+      - id: no_v_new
+        run: echo "${NEW_TAG//v/}"
+  change_toml:
+    runs-on: ubuntu-latest
+    needs: no_v
+    steps:
     - run: |
-        OLD_TAG="${OLD_TAG//v/}"
-        NEW_TAG="${NEW_TAG//v/}"
+        echo ${{needs.no_v.outputs.new_tag_no_v}}
+        echo ${{needs.no_v.outputs.old_tag_no_v}}
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-        find: "${OLD_TAG}"
-        replace: "${NEW_TAG}"
+        find: "${{needs.no_v.outputs.old_tag_no_v}}"
+        replace: "${{needs.no_v.outputs.new_tag_no_v}}"
         include: "project.toml"
-    - run: |
-        echo ${OLD_TAG}
+
