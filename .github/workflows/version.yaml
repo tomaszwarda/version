@@ -33,9 +33,14 @@ jobs:
     - name: character-replacement
     - run: echo ${{needs.add_tag.outputs.new_tag}}
     - run: echo ${{needs.add_tag.outputs.old_tag}}
+    - run: |
+        OLD_TAG="${OLD_TAG//v/}"
+        NEW_TAG="${NEW_TAG//v/}"
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-        find: "${OLD_TAG//v/}"
-        replace: "${NEW_TAG//v/}"
+        find: "${OLD_TAG}"
+        replace: "${NEW_TAG}"
         include: "project.toml"
+    - run: |
+        echo ${OLD_TAG}
