@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vmngclient"
-version = "0.12.8"
+version = "0.13.1"
 description = "backend vmng"
 we
 we
