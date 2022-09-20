@@ -33,11 +33,13 @@ jobs:
       new_tag_no_v: ${{steps.no_v_new.outputs.test}}
       old_tag_no_v: ${{steps.no_v_old.outputs.test}}
     steps:
-      - id: no_v_old 
+      - id: no_v_old
+        name: Get old tag
         run: |
           tag=$(echo "${{needs.add_tag.outputs.old_tag}}" | sed 's/v//')
           echo "::set-output name=test::$tag"
       - id: no_v_new
+        name: Get new tag
         run: |
           tag=$(echo "${{needs.add_tag.outputs.new_tag}}" | sed 's/v//')
           echo "::set-output name=test::$tag"
@@ -50,9 +52,7 @@ jobs:
           echo "${{needs.no_v.outputs.new_tag_no_v}}"
           echo "${{needs.no_v.outputs.old_tag_no_v}}"
       - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
+        uses: datamonsters/replace-action@v2
         with:
-          find: "${{needs.no_v.outputs.old_tag_no_v}}"
-          replace: "${{needs.no_v.outputs.new_tag_no_v}}"
-          include: "project.toml"
-
+          files: 'project.toml'
+          replacements: '${{needs.no_v.outputs.old_tag_no_v}}=${{needs.no_v.outputs.new_tag_no_v}}'
