@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{steps.tag.outputs.new_tag}}
-      old_tag: ${{steps.tag.outputs.tag}}
+      old_tag: ${{steps.tag.outputs.part}}
     steps:
     - uses: actions/checkout@v3
       with:
