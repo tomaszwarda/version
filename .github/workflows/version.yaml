@@ -36,6 +36,10 @@ jobs:
         OLD_TAG2="$OLD_TAG//v/"
         echo $OLD_TAG
         echo $OLD_TAG2
+        NEW_TAG=${{needs.add_tag.outputs.new_tag}}
+        NEW_TAG2="$OLD_TAG//v/"
+        echo $NEW_TAG
+        echo $NEW_TAG2
     - run: echo ${{needs.add_tag.outputs.new_tag}}
     - run: echo ${{needs.add_tag.outputs.old_tag}}
     - name: Find and Replace
