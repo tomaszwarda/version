@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{steps.tag.outputs.new_tag}}
+      old_tag: ${{steps.tag.outputs.tag}}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -25,3 +26,4 @@ jobs:
     needs: add_tag
     steps:
     - run: echo ${{needs.add_tag.outputs.new_tag}}
+    - run: echo ${{needs.add_tag.outputs.tag}}
