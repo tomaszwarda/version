@@ -6,13 +6,12 @@ on:
 
 jobs:
   add_tag:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
-    - id: build
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
         fetch-depth: '0'
-    - id: new_tag
+    - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.40.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,3 +22,4 @@ jobs:
     needs: add_tag
     steps:
     - run: echo ${{needs.add_tag.outputs.new_tag}}
+    
