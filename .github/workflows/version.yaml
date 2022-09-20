@@ -9,14 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{steps.tag.outputs.new_tag}}
-      old_tag: ${{steps.old.outputs.test}}
+      old_tag: ${{steps.old.outputs.tag}}
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: '0'
-    - id: old
-      name: Get old tag
-      run: echo ${GITHUB_REF##*/}
+    - uses: little-core-labs/get-git-tag@v3.0.1
+      id: old
+      with:
+        tagRegex: "foobar-(.*)"  # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
+        tagRegexGroup: 1 # Optional. Default is 1.
+#     - name: Some other step # Output usage example
+#       with:
+#         tagname: ${{ steps.tagName.outputs.tag }}
     - id: tag
       name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.40.0
