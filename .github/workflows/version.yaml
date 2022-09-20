@@ -1,8 +1,6 @@
 name: Bump version
 on:
   push:
-    tags:
-      - '*'
     branches:
       - main
 
@@ -17,9 +15,9 @@ jobs:
       with:
         fetch-depth: '0'
     - id: old
-      uses: dawidd6/action-get-tag@v1
+      uses: oprypin/find-latest-tag@v1
       with:
-        strip_v: true
+        repository: tomaszwarda/version
     - id: tag
       name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.40.0
