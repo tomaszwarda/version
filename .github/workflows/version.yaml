@@ -34,9 +34,9 @@ jobs:
       old_tag_no_v: ${{steps.no_v_new.outputs.test}}
     steps:
       - id: no_v_old 
-        run: echo "${{steps.add_tag.outputs.old_tag//v/}}"
+        run: echo "${${{steps.add_tag.outputs.old_tag}}//v/}"
       - id: no_v_new
-        run: echo "${{steps.add_tag.outputs.new_tag//v/}}"
+        run: echo "${${{steps.add_tag.outputs.new_tag}}//v/}"
   change_toml:
     runs-on: ubuntu-latest
     needs: no_v
