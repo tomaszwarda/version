@@ -9,11 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       new_tag: ${{steps.tag.outputs.new_tag}}
-      old_tag: ${{steps.tag.outputs.part}}
+      old_tag: ${{steps.old.outputs.test}}
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: '0'
+    - id: old
+      name: Get old tag
+      run: echo ${GITHUB_REF##*/}
     - id: tag
       name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.40.0
