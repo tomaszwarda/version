@@ -30,8 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: add_tag
     outputs:
-      new_tag_no_v: ${{steps.no_v_old.outputs.test}}
-      old_tag_no_v: ${{steps.no_v_new.outputs.test}}
+      new_tag_no_v: ${{steps.no_v_new.outputs.test}}
+      old_tag_no_v: ${{steps.no_v_old.outputs.test}}
     steps:
       - id: no_v_old 
         run: |
