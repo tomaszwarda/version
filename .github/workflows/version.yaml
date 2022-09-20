@@ -52,4 +52,7 @@ jobs:
           echo "${{needs.no_v.outputs.new_tag_no_v}}"
           echo "${{needs.no_v.outputs.old_tag_no_v}}"
       - name: Find and Replace
-        run: sed -i 's/${{needs.no_v.outputs.old_tag_no_v}}/${{needs.no_v.outputs.new_tag_no_v}}/g' ./project.toml
+        uses: datamonsters/replace-action@v2
+        with:
+          files: 'project.toml'
+          replacements: '1=loldziala'
