@@ -30,7 +30,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: add_tag
     steps:
-    - name: character-replacement
     - run: echo ${{needs.add_tag.outputs.new_tag}}
     - run: echo ${{needs.add_tag.outputs.old_tag}}
     - run: |
