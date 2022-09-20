@@ -14,9 +14,14 @@ jobs:
   add_tag:
     runs-on: ubuntu-lates
     outputs:
-      new_tag: ${{steps.outputs.new_tag}}
+      new_tag: ${{steps.new_tag.outputs.new_tag}}
     steps:
-    - uses: anothrNick/github-tag-action@1.40.0
+    - id: build
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
+    - id: new_tag
+      uses: anothrNick/github-tag-action@1.40.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
