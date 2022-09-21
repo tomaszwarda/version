@@ -67,6 +67,8 @@ jobs:
         with:
           files: |
              project.toml
+      - name: print
+        run: echo "${steps.verify-changed-files.outputs.changed_files}"
       - name: Perform action when projecttoml changes
         if: contains(steps.verify-changed-files.outputs.changed_files, 'project.toml')
         run: |
