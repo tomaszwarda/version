@@ -80,7 +80,9 @@ jobs:
 #             echo "Do something with this ${changed_file}."
       - name: check for file
         if: contains(steps.files.outputs.all, 'project.toml') == false
-        run: echo "no project toml"
+        run: |
+          echo "project.toml not changed"
+          exit 1
 #       - name: Determine Checkout Depth
 #         uses: haya14busa/action-cond@v1
 #         id: fetchDepth
