@@ -61,23 +61,26 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - name: Verify Changed files
-        uses: tj-actions/verify-changed-files@v11.1
-        id: verify-changed-files
-        with:
-          files: |
-             project.toml
-      - name: print
-        run: echo "${{steps.verify-changed-files.outputs.changed_files}}"
-      - name: Perform action when projecttoml changes
-        if: contains(steps.verify-changed-files.outputs.changed_files, 'project.toml')
-        run: |
-          echo "test_directory has changed."
-#       - id: files
-#         uses: jitterbit/get-changed-files@v1
+#       - name: Verify Changed files
+#         uses: tj-actions/verify-changed-files@v11.1
+#         id: verify-changed-files
+#         with:
+#           files: |
+#              project.toml
+#       - name: print
+#         run: echo "${{steps.verify-changed-files.outputs.changed_files}}"
+#       - name: Perform action when projecttoml changes
+#         if: contains(steps.verify-changed-files.outputs.changed_files, 'project.toml')
+#         run: |
+#           echo "test_directory has changed."
+      - id: files
+        uses: jitterbit/get-changed-files@v1
 #       - run: |
 #           for changed_file in ${{ steps.files.outputs.all }}; do
 #             echo "Do something with this ${changed_file}."
       - name: check for file
         if: contains(steps.files.outputs.all, 'project.toml')
         run: echo "oke"
+      - name: chek versionyml
+        if: contains(steps.files.outputs.all, 'version.yaml')
+        run: echo "v oke l"
