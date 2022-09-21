@@ -53,9 +53,14 @@ jobs:
 #           echo "${{needs.no_v.outputs.old_tag_no_v}}"
 #       - name: Find and Replace
 #         run: ls
+
   change_sth:
     runs-on: ubuntu-latest
     steps:
+      - name: check
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v11.1
         id: verify-changed-files
