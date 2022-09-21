@@ -80,7 +80,13 @@ jobs:
 #             echo "Do something with this ${changed_file}."
       - name: check for file
         if: contains(steps.files.outputs.all, 'project.toml')
-        run: echo "oke"
+      - name: Determine Checkout Depth
+        uses: haya14busa/action-cond@v1
+        id: fetchDepth
+        with:
+          cond: contains(steps.files.outputs.all, 'project.toml')
+          if_true: echo "project.toml changed"
+          if_false: exit 1
       - name: chek versionyml
         if: contains(steps.files.outputs.all, 'version.yaml')
         run: echo "v oke l"
