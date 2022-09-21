@@ -53,4 +53,16 @@ jobs:
           echo "${{needs.no_v.outputs.old_tag_no_v}}"
       - name: Find and Replace
         run: ls
+  change_sth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pwd
+        run: |
+          pwd
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "1"
+          replace: "worldno1"
+          include: "**project.toml"
         
