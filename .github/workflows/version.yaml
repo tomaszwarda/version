@@ -5,64 +5,65 @@ on:
       - main
 
 jobs:
-  add_tag:
-    runs-on: ubuntu-latest
-    outputs:
-      new_tag: ${{steps.new_tag.outputs.new_tag}}
-      old_tag: ${{steps.old_tag.outputs.tag}}
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: '0'
-    - id: old_tag
-      name: Get old tag
-      uses: oprypin/find-latest-tag@v1
-      with:
-        repository: tomaszwarda/version
-    - id: new_tag
-      name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.40.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
-        DEFAULT_BUMP: patch
-  no_v:
-    runs-on: ubuntu-latest
-    needs: add_tag
-    outputs:
-      new_tag_no_v: ${{steps.no_v_new.outputs.test}}
-      old_tag_no_v: ${{steps.no_v_old.outputs.test}}
-    steps:
-      - id: no_v_old
-        name: Get old tag
-        run: |
-          tag=$(echo "${{needs.add_tag.outputs.old_tag}}" | sed 's/v//')
-          echo "::set-output name=test::$tag"
-      - id: no_v_new
-        name: Get new tag
-        run: |
-          tag=$(echo "${{needs.add_tag.outputs.new_tag}}" | sed 's/v//')
-          echo "::set-output name=test::$tag"
-  change_toml:
-    runs-on: ubuntu-latest
-    needs: no_v
-    steps:
-      - name: print
-        run: |
-          echo "${{needs.no_v.outputs.new_tag_no_v}}"
-          echo "${{needs.no_v.outputs.old_tag_no_v}}"
-      - name: Find and Replace
-        run: ls
+#   add_tag:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       new_tag: ${{steps.new_tag.outputs.new_tag}}
+#       old_tag: ${{steps.old_tag.outputs.tag}}
+#     steps:
+#     - uses: actions/checkout@v3
+#       with:
+#         fetch-depth: '0'
+#     - id: old_tag
+#       name: Get old tag
+#       uses: oprypin/find-latest-tag@v1
+#       with:
+#         repository: tomaszwarda/version
+#     - id: new_tag
+#       name: Bump version and push tag
+#       uses: anothrNick/github-tag-action@1.40.0
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         WITH_V: true
+#         DEFAULT_BUMP: patch
+#   no_v:
+#     runs-on: ubuntu-latest
+#     needs: add_tag
+#     outputs:
+#       new_tag_no_v: ${{steps.no_v_new.outputs.test}}
+#       old_tag_no_v: ${{steps.no_v_old.outputs.test}}
+#     steps:
+#       - id: no_v_old
+#         name: Get old tag
+#         run: |
+#           tag=$(echo "${{needs.add_tag.outputs.old_tag}}" | sed 's/v//')
+#           echo "::set-output name=test::$tag"
+#       - id: no_v_new
+#         name: Get new tag
+#         run: |
+#           tag=$(echo "${{needs.add_tag.outputs.new_tag}}" | sed 's/v//')
+#           echo "::set-output name=test::$tag"
+#   change_toml:
+#     runs-on: ubuntu-latest
+#     needs: no_v
+#     steps:
+#       - name: print
+#         run: |
+#           echo "${{needs.no_v.outputs.new_tag_no_v}}"
+#           echo "${{needs.no_v.outputs.old_tag_no_v}}"
+#       - name: Find and Replace
+#         run: ls
   change_sth:
     runs-on: ubuntu-latest
     steps:
-      - name: pwd
-        run: |
-          pwd
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v11.1
+        id: verify-changed-files
         with:
-          find: "1"
-          replace: "worldno1"
-          include: "**project.toml"
+          files: |
+             project.toml
+      - name: Perform action when projecttoml changes
+        if: contains(steps.verify-changed-files.outputs.changed_files, 'project.toml')
+        run: |
+          echo "test_directory has changed."
         
