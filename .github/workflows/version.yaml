@@ -79,8 +79,8 @@ jobs:
 #           for changed_file in ${{ steps.files.outputs.all }}; do
 #             echo "Do something with this ${changed_file}."
       - name: check for file
-        if: contains(steps.files.outputs.all, 'project.toml') == 'true'
-        run: echo "true"
+        if: contains(steps.files.outputs.all, 'project.toml') == false
+        run: echo "no project toml"
 #       - name: Determine Checkout Depth
 #         uses: haya14busa/action-cond@v1
 #         id: fetchDepth
