@@ -89,5 +89,5 @@ jobs:
 #           if_true: run: echo "project.toml changed"
 #           if_false: exit 1
       - name: chek versionyml
-        if: contains(steps.files.outputs.all, 'version.yaml') == 'true'
+        if: contains(steps.files.outputs.all, 'version.yaml') == true
         run: echo "v oke l"
