@@ -3,9 +3,11 @@ on:
   push:
     branches:
       - main
-
+  pull_request:
+    branches:
+      - main
 jobs:
-#   add_tag:
+#   add_tag: gjh
 #     runs-on: ubuntu-latest
 #     outputs:
 #       new_tag: ${{steps.new_tag.outputs.new_tag}}
