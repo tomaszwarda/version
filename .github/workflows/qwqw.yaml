@@ -2,6 +2,9 @@ name: Bump version
 on:
   pull_request_target:
     types: [ auto_merge_enabled, auto_merge_disabled ]
+  pull_request:
+   branches:
+     - main
 
 jobs:
   change_sth:
