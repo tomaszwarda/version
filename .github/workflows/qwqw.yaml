@@ -1,8 +1,6 @@
 name: Bump version
 on:
   pull_request_target:
-    branches:
-      - main
     types:
       - auto_merge_enabled
 
