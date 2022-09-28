@@ -2,10 +2,7 @@ name: Bump version
 on:
   pull_request_target:
     types: [ auto_merge_enabled, auto_merge_disabled ]
-  pull_request:
-   branches:
-     - main
-   types: [ auto_merge_enabled, auto_merge_disabled ]
+
 jobs:
   change_sth:
     runs-on: ubuntu-latest
