@@ -1,8 +1,7 @@
 name: Bump version
 on:
   pull_request_target:
-    types:
-      - auto_merge_enabled
+    types: [ auto_merge_enabled, auto_merge_disabled ]
 
 jobs:
   change_sth:
