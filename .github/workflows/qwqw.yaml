@@ -1,8 +1,7 @@
 name: Bump version
 
 on:
-  pull_request_target:
-    types: [ auto_merge_enabled, auto_merge_disabled ]
+  push:
 
 jobs:
   change_sth:
@@ -13,5 +12,5 @@ jobs:
         with:
           fetch-depth: '0'
       - name: sth
-        run: echo "EEEE"
+        run: echo "${{ github.event.head_commit.message }}"
         
