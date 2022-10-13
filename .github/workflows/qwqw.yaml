@@ -24,6 +24,23 @@ jobs:
           echo $version
           echo "-----"
           echo $version
+          TAG=$(
+             echo "version" | while IFS=. read major minor patch; do
+                 # add sanity-checks here
+                 case "$1" in
+                    patch)
+                       echo "$major.$minor.$((patch+1))"
+                       ;;
+                    major)
+                       echo "$((major+1).0.0"
+                       ;;
+                    minor|*)
+                       echo "$major.$((minor+1)).0" 
+                       ;;
+                 esac
+             done
+          )
+          echo $tag
       - name: delete version.txt
         run: rm version.txt
       - name: commit file.txt
