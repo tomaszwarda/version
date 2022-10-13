@@ -24,10 +24,12 @@ jobs:
           echo $version
           echo "-----"
           echo $version
+      - name: delete version.txt
+        run: rm version.txt
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Auto verssioning
           author_email: auto@version.com
           message: 'some commit'
-          add: 'version.txt'
+          add: 'file.txt'
