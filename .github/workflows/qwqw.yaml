@@ -22,26 +22,8 @@ jobs:
         run: |
           version=`cat version.txt`
           echo $version
-          echo "-----"
-          echo $version
-          $version; IFS="." read a b c <<< "$version"; echo "$a $b $c"
-#          TAG=$(
-#             echo "version" | while IFS="." read major minor patch << $version; do
-#                 # add sanity-checks here
-#                 case "$1" in
-#                    patch)
-#                       echo "$major.$minor.$((patch+1))"
-#                       ;;
-#                    major)
-#                       echo "$((major+1).0.0"
-#                       ;;
-#                    minor|*)
-#                       echo "$major.$((minor+1)).0"
-#                       ;;
-#                 esac
-#             done
-#          )
-#          echo $tag
+          perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
+          cat version.txt
       - name: delete version.txt
         run: rm version.txt
       - name: commit file.txt
