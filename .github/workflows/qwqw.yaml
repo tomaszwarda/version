@@ -22,6 +22,8 @@ jobs:
         run: |
           version=`cat version.txt`
           echo $version
+          echo "-----"
+          echo $version
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
