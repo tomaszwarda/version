@@ -13,6 +13,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - name: sth
+      - name: Echo commit msg
         run: echo "${{ github.event.head_commit.message }}"
-        
+      - name: make file.txt
+        run: grep -o '".*"' project.toml | sed 's/"//g' >> file.txt
+      - name: commit file.txt
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: tomaszwarda
+          author_email: mail@example.com
+          message: 'some commit'
+          add: 'file.txt'
