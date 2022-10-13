@@ -18,6 +18,10 @@ jobs:
         run: grep -o '".*"' project.toml | sed 's/"//g' >> file.txt
       - name: update file.txt
         run: sed '2q;d' file.txt >> version.txt
+      - name: save to variable and echo
+        run: |
+          version=`cat version.txt`
+          echo $version
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
