@@ -20,10 +20,13 @@ jobs:
         run: sed '2q;d' file.txt >> version.txt
       - name: save to variable and echo
         run: |
-          version=`cat version.txt`
-          echo $version
+          old_version=`cat version.txt`
           perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
+          new_version=`cat version.txt`
           cat version.txt
+          echo "-----"
+          echo $old_version
+          echo $new_version
       - name: delete version.txt
         run: rm version.txt
       - name: commit file.txt
