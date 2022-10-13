@@ -27,23 +27,25 @@ jobs:
           echo "-----"
           echo $old_version
           echo $new_version
-          if [[ ${{ github.event.head_commit.message }} =~ "patch" ]];
-          then
-            perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
-          elif [[ ${{ github.event.head_commit.message }} =~ "minor" ]];
-          then
-            perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
-          elif [[ ${{ github.event.head_commit.message }} =~ "major" ]];
-          then
-            perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
-          else
-            echo "No bump"
-          fi
-          newest_version=`cat version.txt`
-          echo "-----"
-          echo $old_version
-          echo $new_version
-          echo $newest_version
+#          if [[ ${{ github.event.head_commit.message }} =~ "patch" ]];
+#          then
+#            perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
+#          elif [[ ${{ github.event.head_commit.message }} =~ "minor" ]];
+#          then
+#            perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
+#          elif [[ ${{ github.event.head_commit.message }} =~ "major" ]];
+#          then
+#            perl -i -pe 's/\d+\.\d+\.\K(\d+)/ $1+1 /e' version.txt
+#          else
+#            echo "No bump"
+#          fi
+#          newest_version=`cat version.txt`
+#          echo "-----"
+#          echo $old_version
+#          echo $new_version
+#          echo $newest_version
+      - name: other name
+        run: echo "new version"
       - name: delete version.txt
         run: rm version.txt
       - name: commit file.txt
