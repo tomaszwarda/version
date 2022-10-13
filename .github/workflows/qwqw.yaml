@@ -45,7 +45,7 @@ jobs:
 #          echo $new_version
 #          echo $newest_version
       - name: other name
-        run: echo "new version"
+        run: echo $new_version
       - name: delete version.txt
         run: rm version.txt
       - name: commit file.txt
