@@ -24,4 +24,4 @@ jobs:
           author_name: Auto verssioning
           author_email: auto@version.com
           message: 'some commit'
-          add: 'file.txt'
+          add: 'version.txt'
