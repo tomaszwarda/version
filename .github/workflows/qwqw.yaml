@@ -16,10 +16,12 @@ jobs:
         run: echo "${{ github.event.head_commit.message }}"
       - name: make file.txt
         run: grep -o '".*"' project.toml | sed 's/"//g' >> file.txt
+      - name: update file.txt
+        run: sed '2q;d' file.txt > file.txt
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: tomaszwarda
-          author_email: mail@example.com
+          author_name: Auto verssioning
+          author_email: auto@version.com
           message: 'some commit'
           add: 'file.txt'
