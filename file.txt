@@ -19,3 +19,6 @@ backend vmng
 vmngclient
 0.13.6
 backend vmng
+vmngclient
+0.13.6
+backend vmng
