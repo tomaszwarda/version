@@ -37,7 +37,7 @@ jobs:
       - name: bump
         run: |
           python
-          print($old_version)
+          print(${{old_version}})
           exit()
       - name: delete version.txt
         run: rm version.txt
