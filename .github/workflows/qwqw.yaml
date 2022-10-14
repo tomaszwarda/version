@@ -20,6 +20,7 @@ jobs:
         run: sed '2q;d' file.txt >> version.txt
       - name: save to variable and echo
         run: |
+          cat version.txt
           old_version=`cat version.txt`
           echo $old_version
 #           perl -i -pe 's/\d+\.\K(\d+)\."0" $1+1 /e' version.txt
