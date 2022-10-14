@@ -21,6 +21,7 @@ jobs:
       - name: save to variable and echo
         run: |
           old_version=`cat version.txt`
+          echo $old_version
 #           perl -i -pe 's/\d+\.\K(\d+)\."0" $1+1 /e' version.txt
 #           echo ".0" >> version.txt
 #           new_version=`cat version.txt`
