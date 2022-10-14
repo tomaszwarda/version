@@ -20,7 +20,6 @@ jobs:
         run: sed '2q;d' file.txt >> version.txt
       - name: save to variable and echo
         run: |
-          cat version.txt
           old_version=`cat version.txt`
           echo $old_version
 #           perl -i -pe 's/\d+\.\K(\d+)\."0" $1+1 /e' version.txt
@@ -30,8 +29,8 @@ jobs:
 #           echo "-----"
 #           echo $old_version
 #           echo $new_version
-#      - name: other name
-#        run: echo $old_version
+      - name: other name
+        run: echo $old_version
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
@@ -40,7 +39,6 @@ jobs:
         run: |
           python
           print("elo")
-          exit()
       - name: delete version.txt
         run: rm version.txt
       - name: commit file.txt
