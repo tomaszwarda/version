@@ -22,6 +22,7 @@ jobs:
         run: |
           cat version.txt
           old_version=`cat version.txt`
+          echo $old_version
 #           perl -i -pe 's/\d+\.\K(\d+)\."0" $1+1 /e' version.txt
 #           echo ".0" >> version.txt
 #           new_version=`cat version.txt`
@@ -29,8 +30,8 @@ jobs:
 #           echo "-----"
 #           echo $old_version
 #           echo $new_version
-      - name: other name
-        run: echo $old_version
+#      - name: other name
+#        run: echo $old_version
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
