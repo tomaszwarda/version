@@ -19,9 +19,13 @@ jobs:
       - name: update file.txt
         run: sed '2q;d' file.txt >> version.txt
       - name: save to variable and echo
+        id: version
         run: |
           old_version=`cat version.txt`
           echo $old_version
+          echo "::set-output name=old_v::${old_version}"
+    outputs:
+      git_pr_sha: ${{ steps.identify.outputs.old_v }}
 #           perl -i -pe 's/\d+\.\K(\d+)\."0" $1+1 /e' version.txt
 #           echo ".0" >> version.txt
 #           new_version=`cat version.txt`
@@ -29,8 +33,12 @@ jobs:
 #           echo "-----"
 #           echo $old_version
 #           echo $new_version
+  job2:
+    runs-on: ubuntu-latest
+    needs: change_sth
+    steps:
       - name: other name
-        run: echo $old_version
+        run: echo "${{ needs.change_sth.outputs.old_v }}"
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
