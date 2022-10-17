@@ -18,10 +18,6 @@ jobs:
           version_line=$(sed '3q;d' pyproject.toml)
           old_version=`echo "${version_line}" | cut -d'"' -f 2`
           echo "old_version=${old_version}" >> $GITHUB_ENV
-      - name: Set up Python3.8
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
       - name: Make new version variable
         run: |
           new_version=$(python script.py ${{ env.old_version }} ${{ github.event.head_commit.message }})
