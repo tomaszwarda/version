@@ -42,9 +42,7 @@ jobs:
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: danielui
-          author_email: daniel.bartnicki1123@gmail.com
-          message: 'some commit'
+          message: 'vesion bump'
           add: 'project.toml'
       - name: tag adding
         if: ${{ env.new_version != env.old_version }}
