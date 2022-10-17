@@ -2,18 +2,17 @@ name: Bump version
 
 on:
   push:
+   branches: main
 
 
 jobs:
   change_sth:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout ..
+      - name: checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - name: Echo commit msg
-        run: echo "commit_message=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
       - name: make file.txt with current version from pyproject.toml
         run: |
           grep -o '".*"' project.toml | sed 's/"//g' >> file.txt
@@ -25,18 +24,14 @@ jobs:
           echo "old_version=${old_version}" >> $GITHUB_ENV
           rm file.txt
           rm version.txt
-      - name: echo old version
-        run: echo "${{ env.old_version }}"
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
       - name: bump
         run: |
-          new_version=$(python script.py ${{env.old_version}} ${{env.commit_message}})
+          new_version=$(python script.py ${{ env.old_version }} ${{ github.event.head_commit.message }})
           echo "new_version=${new_version}" >> $GITHUB_ENV
-      - name: echo new versio
-        run: echo ${{ env.new_version }}
       - name: change version in .toml
         run: sed -i 's/${{env.old_version}}/${{ env.new_version }}/g' project.toml
       - name: commit file.txt
