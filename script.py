@@ -2,7 +2,7 @@ import sys
 
 data = sys.argv[1:]
 old_version = data[0]
-commit_message = data[1]
+commit_message = " ".join(data[1:])
 
 def bump_version(old_version: str, commit_message: str) -> str:
     """
@@ -23,7 +23,7 @@ def bump_version(old_version: str, commit_message: str) -> str:
     """
     version_list = old_version.split(".")
     
-    if "BRAKING CHANGE" in commit_message:
+    if "BREAKING CHANGE" in commit_message:
         integer_to_change = int(version_list[0]) + 1
         version_list[0] = str(integer_to_change)
         version_list[1] = "0"
