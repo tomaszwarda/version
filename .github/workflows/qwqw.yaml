@@ -13,17 +13,18 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Echo commit msg
-        run: echo "${{ github.event.head_commit.message }}"
-      - name: make file.txt
-        run: grep -o '".*"' project.toml | sed 's/"//g' >> file.txt
-      - name: update file.txt
-        run: sed '2q;d' file.txt >> version.txt
-      - name: save to variable and echo
+        run: echo "commit_message=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
+      - name: make file.txt with current version from pyproject.toml
+        run: |
+          grep -o '".*"' project.toml | sed 's/"//g' >> file.txt
+          sed '2q;d' file.txt >> version.txt
+      - name: save old version to variable
         id: version
         run: |
           old_version=`cat version.txt`
-          echo $old_version
           echo "old_version=${old_version}" >> $GITHUB_ENV
+          rm file.txt
+          rm version.txt
       - name: other name
         run: echo "${{ env.old_version }}"
       - name: Set up Python
