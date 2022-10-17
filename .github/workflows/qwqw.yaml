@@ -42,7 +42,7 @@ jobs:
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: tomaszwarda123123123123123123123123125654372456qwer
+          author_name: 1234tomaszwarda123123123123123123123123125654372456qwer
           message: 'some commit'
           add: 'project.toml'
       - name: tag adding
