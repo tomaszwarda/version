@@ -16,7 +16,9 @@ jobs:
       - name: make file.txt with current version from pyproject.toml
         run: | 
           version_line=$(sed '2q;d' project.toml)
+          echo ${version_line}
           old_version=`echo "$version_line" | cut -d'"' -f 2`
+          echo ${old_version}
           echo "old_version=${old_version}" >> $GITHUB_ENV
       - name: Set up Python
         uses: actions/setup-python@v4
