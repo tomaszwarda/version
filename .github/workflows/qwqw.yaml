@@ -25,7 +25,7 @@ jobs:
           echo "old_version=${old_version}" >> $GITHUB_ENV
           rm file.txt
           rm version.txt
-      - name: other name
+      - name: echo old version
         run: echo "${{ env.old_version }}"
       - name: Set up Python
         uses: actions/setup-python@v4
