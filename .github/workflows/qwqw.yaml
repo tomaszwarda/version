@@ -43,6 +43,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           author_name: danielui
+          author_email: daniel.bartnicki1123@gmail.com
           message: 'some commit'
           add: 'project.toml'
       - name: tag adding
