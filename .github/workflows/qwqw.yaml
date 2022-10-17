@@ -16,7 +16,7 @@ jobs:
       - name: make file.txt with current version from pyproject.toml
         run: | 
           grep -o '".*"' project.toml | var=$(sed 's/"//g')
-          echo $var
+          echo "${var}"
           sed '2q;d' $var >> version.txt
       - name: save old version to variable
         id: version
