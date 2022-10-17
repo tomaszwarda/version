@@ -16,7 +16,7 @@ jobs:
       - name: Get current version from pyproject.toml
         run: | 
           version_line=$(sed '3q;d' pyproject.toml)
-          old_version=`echo "$version_line" | cut -d'"' -f 2`
+          old_version=`echo "${version_line}" | cut -d'"' -f 2`
           echo "old_version=${old_version}" >> $GITHUB_ENV
       - name: Set up Python3.8
         uses: actions/setup-python@v4
