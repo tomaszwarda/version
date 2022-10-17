@@ -42,8 +42,7 @@ jobs:
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: Auto verssioning
-          author_email: auto@version.com
+          author_name: tomaszwarda
           message: 'some commit'
           add: 'project.toml'
       - name: tag adding
