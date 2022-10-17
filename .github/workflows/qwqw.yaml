@@ -33,10 +33,10 @@ jobs:
           python-version: 3.8
       - name: bump
         run: |
-          python
-          print("elo")
-      - name: delete version.txt
-        run: rm version.txt
+          new_version=$(python script.py ${{env.old_version}} ${{env.commit_message}})
+          echo "new_version=${new_version}" >> $GITHUB_ENV
+      - name: echo new versio
+        run: echo ${{ env.new_version }}
       - name: commit file.txt
         uses: EndBug/add-and-commit@v9
         with:
