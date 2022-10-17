@@ -9,33 +9,31 @@ jobs:
   change_sth:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - name: make file.txt with current version from pyproject.toml
+      - name: Get current version from pyproject.toml
         run: | 
           version_line=$(sed '3q;d' project.toml)
-          echo ${version_line}
           old_version=`echo "$version_line" | cut -d'"' -f 2`
-          echo ${old_version}
           echo "old_version=${old_version}" >> $GITHUB_ENV
-      - name: Set up Python
+      - name: Set up Python3.8
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
-      - name: bump
+      - name: Make new version variable
         run: |
           new_version=$(python script.py ${{ env.old_version }} ${{ github.event.head_commit.message }})
           echo "new_version=${new_version}" >> $GITHUB_ENV
-      - name: change version in .toml
+      - name: Update version in pyproject.toml
         run: sed -i 's/${{env.old_version}}/${{ env.new_version }}/g' project.toml
-      - name: commit file.txt
+      - name: Commit version changes in pyproject.toml
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'vesion bump'
-          add: 'project.toml'
-      - name: tag adding
+          message: 'Automated version bump'
+          add: 'pyproject.toml'
+      - name: Add tag with new verrsion
         if: ${{ env.new_version != env.old_version }}
         uses: rickstaa/action-create-tag@v1
         with:
