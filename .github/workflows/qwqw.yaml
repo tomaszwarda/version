@@ -46,3 +46,7 @@ jobs:
           author_email: auto@version.com
           message: 'some commit'
           add: 'project.toml'
+      - name: tag adding
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ env.new_version }}"
