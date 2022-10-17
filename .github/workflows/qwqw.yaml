@@ -14,8 +14,8 @@ jobs:
         with:
           fetch-depth: '0'
       - name: make file.txt with current version from pyproject.toml
-        run: |
-          grep -o '".*"' project.toml | sed 's/"//g' | sed '2q;d' file.txt >> version.txt
+        run: | 
+          grep -o '".*"' project.toml | sed '2q;d' $(sed 's/"//g') >> version.txt
       - name: save old version to variable
         id: version
         run: |
