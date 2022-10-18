@@ -16,4 +16,6 @@ jobs:
           fetch-depth: '0'
       - name: Make new version variable
         run: |
+          echo ${{ github.event.head_commit.message }} | head -1`
+          echo "----"
           echo ${{ github.event.head_commit.message }}
