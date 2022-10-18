@@ -18,9 +18,13 @@ jobs:
           version_line=$(sed '3q;d' pyproject.toml)
           old_version=`echo "${version_line}" | cut -d'"' -f 2`
           echo "old_version=${old_version}" >> $GITHUB_ENV
+      - name: Get commit message (without description)
+        run: |
+          commit_message=`echo "${{ github.event.head_commit.message }}" | head -1`
+          echo "commit_message=${commit_message}" >> $GITHUB_ENV
       - name: Make new version variable
         run: |
-          new_version=$(python script.py ${{ env.old_version }} ${{ github.event.head_commit.message }})
+          new_version=$(python script.py ${{ env.old_version }} ${{ env.commit_message }})
           echo "new_version=${new_version}" >> $GITHUB_ENV
       - name: Update version in pyproject.toml
         run: sed -i 's/${{env.old_version}}/${{ env.new_version }}/g' pyproject.toml
