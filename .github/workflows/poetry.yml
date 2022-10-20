@@ -2,6 +2,7 @@ name: Run unittests
 
 on:
   push:
+    branches: main
 
 jobs:
   unittests:
