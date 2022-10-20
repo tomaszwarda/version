@@ -22,12 +22,17 @@ jobs:
           poetry-version: 1.1.13
       - name: Get old version
         run: |
-          bump_message=$(poetry version)
-          old_version=$(echo "${bump_message##* }")
+          version_message=$(poetry version)
+          old_version=$(echo "${version_message##* }")
           echo "old_version=${old_version}" >> $GITHUB_ENV
+      - name: Get bump message
+        run: |
+          commit_message=`echo "${{ github.event.head_commit.message }}" | head -1`
+          bump=`echo "${commit_message%%:*}"`
+          echo "bump=${bump}" >> $GITHUB_ENV
       - name: Bump version and get new version
         run: |
-          bump_message=$(poetry version minor)
+          bump_message=$(poetry version ${{ env.bump }})
           new_version=$(echo "${bump_message##* }")
           echo "new_version=${new_version}" >> $GITHUB_ENV
       - name: Commit version changes in pyproject.toml
