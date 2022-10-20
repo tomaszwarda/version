@@ -20,5 +20,23 @@ jobs:
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: 1.1.13
-      - name: print version
-        run: poetry version
+      - name: Get old version
+        run: |
+          bump_message=$(poetry version)
+          old_version=$(echo "${bump_message##* }")
+          echo "old_version=${old_version}" >> $GITHUB_ENV
+      - name: Bump version and get new version
+        run: |
+          bump_message=$(poetry version minor)
+          new_version=$(echo "${bump_message##* }")
+          echo "new_version=${new_version}" >> $GITHUB_ENV
+      - name: Commit version changes in pyproject.toml
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Automated version bump'
+          add: 'pyproject.toml'
+      - name: Add tag with new version
+        if: ${{ env.new_version != env.old_version }}
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ env.new_version }}
