@@ -30,7 +30,7 @@ jobs:
         run: |
           stringContain() { [ -z "$1" ] || { [ -z "${2##*$1*}" ] && [ -n "$2" ];};}
           commit_message=`echo "${{ github.event.head_commit.message }}" | head -1`
-          if stringContain ':' $commit_message;then bump=`echo "${commit_message%%:*}"`;else echo "";fi
+          if stringContain ':' $commit_message;then bump=`echo "${commit_message%%:*}"`;else bump="";fi
           bump=`echo "${commit_message%%:*}"`
           echo "bump=${bump}" >> $GITHUB_ENV
       - name: Bump version and get new version
