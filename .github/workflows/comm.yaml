@@ -26,4 +26,5 @@ jobs:
         run: |
           v=`echo "${{ github.event.head_commit.message }}"`
           msg=$(echo "${v##*\n}")
-          echo $msg
+          echo $v
+          echo $v | sed -n 3p
