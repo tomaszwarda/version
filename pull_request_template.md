@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report a problem or a bug with vManage-client code.
+labels: ["needs review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for finding the time to report a problem!
+        We really appreciate that.
+  - type: textarea
+    attributes:
+      label: Summary
+      description: Description of the bug, what happened and what you expected to happen
+      placeholder: >
+        Clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Logs and external information
+      description: Add logs to help diagnose the issue.
+      placeholder: >
+        TBD
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Reproduction script
+      description: >
+        Please provide minimal, copy-pasted script which reproduces the issue. 
+        If reproducible script is not provided, issue may be closed.
+        [How to create a Minimal, Reproducible Example](https://stackoverflow.com/help/mcve).
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: On what platform(s) does it occur?
+      multiple: true
+      options:
+        - Windows
+        - Linux
+        - macOS
+        - Not Applicable
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Issue Severity
+      description: |
+        How does it affect you as a user?
+      multiple: false
+      options:
+          - "High: Blocking everything"
+          - "Medium: There is a workaround"
+          - "Low: It annoys me"
+    validations:
+        required: false
