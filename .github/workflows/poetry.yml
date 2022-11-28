@@ -39,7 +39,7 @@ jobs:
           echo "new_version=${new_version}" >> $GITHUB_ENV
         continue-on-error: true
       - name: Check if new version was created
-        if: ${{env.new_version}} != ""
+        if: ${{env.new_version}} == ""
         run: echo "new_version=${old_version}" >> $GITHUB_ENV
       - name: Commit version changes in pyproject.toml
         uses: EndBug/add-and-commit@v9
