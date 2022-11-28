@@ -38,6 +38,8 @@ jobs:
           new_version=$(echo "${bump_message##* }")
           echo "new_version=${new_version}" >> $GITHUB_ENV
         continue-on-error: true
+      - name: print new version
+        run: echo "$env.new_version"
       - name: Check if new version was created
         run: |
           if [ "$env.new_version" == "" ]; then
