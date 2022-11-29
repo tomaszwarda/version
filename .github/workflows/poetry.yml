@@ -40,7 +40,7 @@ jobs:
         continue-on-error: true
       - name: Check if new version was created
         run: |
-          if [ -z "$env.new_version" ]; then
+          if [ -z "${{env.new_version}}" ]; then
             echo "new_version=${old_version}" >> $GITHUB_ENV
           else
             echo "new version found"
